@@ -10,7 +10,163 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employeeArray = [];
 
+async function init() {
+    var employeeData = await inquirer.prompt([
+        {
+            // Select type of employee to add
+            type: "checkbox",
+            name: "type",
+            message: "Which type of employee would you like to add?",
+            choices: [
+                "Manager",
+                "Engineer",
+                "Intern"
+            ]
+        },
+        {
+            // Name
+            type: "input",
+            name: "name",
+            message: "What is the employee's name?"
+        },
+        {
+            // Id
+            type: "input",
+            name: "id",
+            message: "What is the employee's id?"
+        },
+        {
+            // Email
+            type: "input",
+            name: "email",
+            message: "What is the employee's email?"
+        }
+    ]).then(async function(data) {
+        var employeeName = data.name;
+        var employeeId = data.id;
+        var employeeEmail = data.email;
+        switch(data.type[0]) {
+            case "Manager" :
+                var employeeOfficeNumber = await inquirer.prompt([
+                    {
+                        // Office number
+                        type: "input",
+                        name: "officeNumber",
+                        message: "What is the employee's office number?"
+                    }
+                ]).then(function(data) {
+                    var employeeOfficeNumber = data.officeNumber;
+                    var employeeObject = new Manager(employeeName, employeeId, employeeEmail, employeeOfficeNumber);
+                    employeeArray.push(employeeObject);
+                });
+                break;
+            case "Engineer" :
+                var employeeGithub = await inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "github",
+                        message: "What is the employee's github username?"
+                    }
+                ]).then(function(data) {
+                    var employeeGithub = data.github;
+                    var employeeObject = new Engineer(employeeName, employeeId, employeeEmail, employeeGithub);
+                    employeeArray.push(employeeObject);
+                });
+                break;
+            case "Intern" :
+                var employeeSchool = await inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "school",
+                        message: "What school is the employee attending?"
+                    }
+                ]).then(function(data) {
+                    var employeeSchool = data.school;
+                    var employeeObject = new Intern(employeeName, employeeId, employeeEmail, employeeSchool);
+                    employeeArray.push(employeeObject);
+                });
+                break;
+        }
+        console.log("employeeArray", employeeArray);
+        continueStatement();
+        });
+}
+
+function managerInquirer() {
+    inquirer.prompt([
+        {
+            // Office number
+            type: "input",
+            name: "officeNumber",
+            message: "What is the employee's office number?"
+        }
+    ]).then(function(data) {
+        return data.officeNumber;
+    });
+}
+
+function engineerInquirer() {
+    inquirer.prompt([
+        {
+            // GitHub
+            type: "input",
+            name: "github",
+            message: "What is the employee's github username?"
+        }
+    ]).then(function(data) {
+        return data.github;
+    });
+}
+
+function internInquirer() {
+    inquirer.prompt([
+        {
+            // School
+            type: "input",
+            name: "school",
+            message: "What school is the employee attending?"
+        }
+    ]).then(function(data) {
+        return data.school;
+    });
+}
+
+function continueStatement() {
+    inquirer.prompt([
+        {
+            type: "checkbox",
+            name: "continue",
+            message: "Would you like to add another employee?",
+            choices: [
+                "Yes",
+                "No"
+            ]
+        }
+    ]).then(function(data) {
+        if (data.continue[0] === "Yes") {
+            init();
+        }
+        else {
+            let html = render(employeeArray);
+            fs.writeFile(outputPath, html, function(err) {
+                if (err) {
+                    return console.log(err);
+                }
+    
+                console.log(`Success! ${outputPath} was created.`);
+            });
+        
+        
+        
+        
+        }
+    })
+}
+
+
+init();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
