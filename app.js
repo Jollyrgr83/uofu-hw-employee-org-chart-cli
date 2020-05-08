@@ -18,18 +18,18 @@ const employeeArray = [];
 async function init() {
     // asks initial questions (type, name, id, and email)
     await inquirer.prompt([
-        questions.type, questions.name, questions.id, questions.email
+        questions.type
     ]).then(async function(data) {
         // creates new employee object base on answer to employee type question (data.type[0])
         switch(data.type[0]) {
             case "manager" :
-                var employeeObject = new Manager(data.name, data.id, data.email, await extraInquiry(data.type[0]));
+                var employeeObject = new Manager(await inquiry("name", "name"), await inquiry("id", "id"), await inquiry("email", "email"), await inquiry(data.type[0], "extra"));
                 break;
             case "engineer" :
-                var employeeObject = new Engineer(data.name, data.id, data.email, await extraInquiry(data.type[0]));
+                var employeeObject = new Engineer(await inquiry("name", "name"), await inquiry("id", "id"), await inquiry("email", "email"), await inquiry(data.type[0], "extra"));
                 break;
             case "intern" :
-                var employeeObject = new Intern(data.name, data.id, data.email, await extraInquiry(data.type[0]));
+                var employeeObject = new Intern(await inquiry("name", "name"), await inquiry("id", "id"), await inquiry("email", "email"), await inquiry(data.type[0], "extra"));
                 break;
         }
         // adds employee object to employee array
@@ -39,9 +39,13 @@ async function init() {
         });
 }
 // used to ask the extra question for each employee type
-async function extraInquiry(employeeType) {
-    return await inquirer.prompt([questions[employeeType]]).then(function(data) {
-        return data.extra;
+async function inquiry(question, dataName) {
+    return await inquirer.prompt([questions[question]]).then(function(data) {
+        if (question === "email" && data[dataName].indexOf("@") === -1) {
+            console.log("Please enter a valid email address.");
+            return inquiry(question, dataName);
+        }
+        return data[dataName];
     });
 }
 // asks if user would like to continue adding more employees or to end the program
