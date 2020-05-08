@@ -1,5 +1,5 @@
 # org-chart
-![Packagist](https://img.shields.io/packagist/l/jollyrgr83/readme-generator)
+![Packagist](https://img.shields.io/packagist/l/jollyrgr83/org-chart)
 
 [Video Demonstration](https://drive.google.com/file/d/1cSJKCUNf94oYIuGEm8Us25Wzva4cU_IE/view)
 
