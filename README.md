@@ -1,6 +1,10 @@
 # org-chart
 ![Packagist](https://img.shields.io/packagist/l/jollyrgr83/readme-generator)
 
+[Video Demonstration](https://drive.google.com/file/d/1cSJKCUNf94oYIuGEm8Us25Wzva4cU_IE/view)
+
+[Repo Link](https://github.com/Jollyrgr83/org-chart.git)
+
 ## Installation Instructions
 This project uses the npm package "inquirer" and its associated dependencies.
 
@@ -18,12 +22,6 @@ Email me
 
 ## Tests
 Testing has not been developed for this project yet.
-
-## Link to Live Page
-This project does not have a live page.
-
-## Link to Video Demonstration
-[Video Link](https://drive.google.com/file/d/1A9yPbqY4k65eepAbYXLB3yz_Qj0Qc0hN/view?usp=sharing)
 
 ## Questions
 [jasongmangin@gmail.com](mailto:jasongmangin@gmail.com)
