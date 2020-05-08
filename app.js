@@ -41,7 +41,11 @@ async function init() {
 // used to ask the extra question for each employee type
 async function inquiry(question, dataName) {
     return await inquirer.prompt([questions[question]]).then(function(data) {
-        if (question === "email" && data[dataName].indexOf("@") === -1) {
+        if (data[dataName] === "") {
+            console.log("Please enter a value");
+            return inquiry(question, dataName);
+        }
+        else if (question === "email" && data[dataName].indexOf("@") === -1) {
             console.log("Please enter a valid email address.");
             return inquiry(question, dataName);
         }
