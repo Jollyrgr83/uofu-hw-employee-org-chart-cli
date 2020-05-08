@@ -1,3 +1,71 @@
 body {
+    background-color: steelblue;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+}
+
+.employee-card {
+    margin: 2.5%;
+    padding: 2.5%;
+    background-color: lightgray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px black;
+}
+
+.employee-card-title {
+    text-align: center;
+    color: navy;
+    margin: 5% 0 5% 0;
+}
+
+.employee-card-name {
+    text-align: center;
     background-color: navy;
+    color: white;
+    border-radius: 10px;
+    padding: 5%;
+}
+
+.employee-card-body {
+    margin: 5% 0 2.5% 0;
+    padding: 0;
+}
+
+ul {
+    margin: 5% 0 5% 0;
+    padding: 0;
+}
+
+li {
+    background-color: whitesmoke;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+    border: solid 1px navy;
+    height: 60px;
+}
+
+.team-heading {
+    background-color: navy;
+    color: white;
+    padding: 5% 0 5% 0;
+    font-weight: 300;
+}
+
+/* My Team Heading */
+h1 {
+    font-size: 48px;
+    font-weight: 300;
+}
+
+/* Employee Names */
+h2 {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+/* Employee Titles */
+h3 {
+    font-size: 24px;
+    font-weight: 300;
 }
